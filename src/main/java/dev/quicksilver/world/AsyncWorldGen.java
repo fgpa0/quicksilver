@@ -129,7 +129,7 @@ public final class AsyncWorldGen {
 
     /** Main thread, from the chunk cache: take a pre-generated chunk instead of generating synchronously. */
     public static Chunk take(Level level, int x, int z) {
-        if (level != currentLevel) return null;
+        if (level != currentLevel || !Quicksilver.isRenderedLevel(level)) return null;
         Chunk c = READY.remove(key(x, z));
         if (c != null) {
             statUsed++;

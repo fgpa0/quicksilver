@@ -8,6 +8,9 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 
 @Mixin(Level.class)
 public interface LevelAccessor {
+    @Accessor("dimensionData")
+    net.minecraft.level.dimension.DimensionData qs$dimensionData();
+
     @Accessor("lightingUpdates")
     List<Object> qs$lightingUpdates();
 

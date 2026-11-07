@@ -218,7 +218,7 @@ public final class RegionIO {
 
     public static DataInputStream openRead(File dir, int x, int z) {
         Key key = new Key(dir, x, z);
-        if (!isIoThread()) lastReadDir = dir;
+        if (!isIoThread() && dev.quicksilver.Quicksilver.isRenderedRegionDir(dir)) lastReadDir = dir; // the prefetch hint follows the rendered level
         CompoundTag pendingTag = pendingTags.get(key);
         if (pendingTag != null) {
             // being saved right now: read back a serialized copy (the loaded chunk must not share arrays with it)

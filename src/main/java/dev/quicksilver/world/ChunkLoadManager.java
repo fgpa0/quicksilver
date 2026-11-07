@@ -75,7 +75,7 @@ public final class ChunkLoadManager {
     private static int prefetchIndex;
 
     public static boolean active(Level level) {
-        if (!QsConfig.progressiveChunkLoading || level == null) return false;
+        if (!QsConfig.progressiveChunkLoading || level == null || !dev.quicksilver.Quicksilver.isRenderedLevel(level)) return false;
         LevelSource c = level.getCache();
         return c instanceof ServerChunkCache || c instanceof ChunkCache;
     }

@@ -38,7 +38,8 @@ public final class Relighter {
 
     /** Game thread: a chunk was added to the singleplayer chunk cache (decoration triggered by it already done). */
     public static void onChunkLoaded(Level level, int x, int z) {
-        if (!QsConfig.fixGenerationLighting || level == null || level.dimension.halvesMapping) return;
+        if (!QsConfig.fixGenerationLighting || level == null || level.dimension.halvesMapping
+                || !dev.quicksilver.Quicksilver.isRenderedLevel(level)) return;
         if (level != currentLevel) {
             currentLevel = level;
             PENDING.clear();

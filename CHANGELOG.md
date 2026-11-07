@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.2 (2026-11-07)
+- Chunk loading, background generation, the shadow fix and chunk prefetching only work on the world you are playing
+  in. A second world that another mod loads in the background (for example to look something up in the overworld
+  while you are in the Nether) is left to vanilla instead of mixing into Quicksilver's queues.
+
 ## 0.1.1 (2026-11-07)
 - Marked as incompatible with StationAPI: the launcher now refuses to start with both installed and says why,
   instead of crashing with a mixin error (they never worked together).

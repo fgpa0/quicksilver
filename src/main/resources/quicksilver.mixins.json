@@ -10,6 +10,7 @@
     "client.MinecraftMixin",
     "client.OptionMixin",
     "client.VideoSettingsMixin",
+    "io.DimensionFileAccessor",
     "io.DimensionFileMixin",
     "io.LevelChunkLoaderMixin",
     "io.NBTIOMixin",

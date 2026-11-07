@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "quicksilver",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "name": "Quicksilver",
   "description": "Performance mod for Minecraft Beta 1.7.3: VBO terrain renderer, multithreaded chunk meshing, background world generation and decoration, faster lighting, async chunk IO, smoother frame pacing, and shader pack support.",
   "authors": [
