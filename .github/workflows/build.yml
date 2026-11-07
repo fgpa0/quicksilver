@@ -1,0 +1,72 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Cache downloads
+        uses: actions/cache@v4
+        with:
+          path: build/cache
+          key: deps-${{ hashFiles('build.py') }}
+
+      - name: Build
+        run: python3 build.py
+
+      - name: Read version
+        id: version
+        run: echo "version=$(python3 -c "import json; print(json.load(open('src/main/resources/fabric.mod.json'))['version'])")" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: quicksilver-${{ steps.version.outputs.version }}
+          path: build/libs/quicksilver-${{ steps.version.outputs.version }}.jar
+
+      - name: Check tag matches version
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          if [ "${GITHUB_REF_NAME#v}" != "${{ steps.version.outputs.version }}" ]; then
+            echo "Tag $GITHUB_REF_NAME does not match version ${{ steps.version.outputs.version }} in fabric.mod.json"
+            exit 1
+          fi
+
+      - name: Release notes
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          # The CHANGELOG.md section of this version.
+          awk -v v="${{ steps.version.outputs.version }}" '
+            /^## / { on = index($0, "## " v " ") == 1 || $0 == "## " v; next }
+            on' CHANGELOG.md > build/notes.md
+          cat build/notes.md
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          PRERELEASE=""
+          case "$VERSION" in *-*) PRERELEASE="--prerelease" ;; esac
+          gh release create "$GITHUB_REF_NAME" "build/libs/quicksilver-$VERSION.jar" \
+            --title "Quicksilver $VERSION" --notes-file build/notes.md $PRERELEASE

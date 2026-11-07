@@ -1,0 +1,22 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "dev.quicksilver.mixin.shader",
+  "compatibilityLevel": "JAVA_17",
+  "client": [
+    "EntityBrightnessMixin",
+    "EntityRenderDispatcherMixin",
+    "GameRendererMixin",
+    "HandRendererMixin",
+    "LevelBrightnessMixin",
+    "LivingEntityRendererMixin",
+    "ParticleManagerMixin",
+    "TessellatorMixin",
+    "TileEntityRenderDispatcherMixin",
+    "VideoSettingsMixin",
+    "WorldRendererMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

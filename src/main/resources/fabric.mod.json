@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "quicksilver",
+  "version": "0.1.0",
+  "name": "Quicksilver",
+  "description": "Performance mod for Minecraft Beta 1.7.3: VBO terrain renderer, multithreaded chunk meshing, background world generation and decoration, faster lighting, async chunk IO, smoother frame pacing, and shader pack support.",
+  "authors": [
+    "Quicksilver contributors"
+  ],
+  "contact": {
+    "sources": "https://github.com/fgpa0/quicksilver",
+    "issues": "https://github.com/fgpa0/quicksilver/issues"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "mixins": [
+    "quicksilver.mixins.json",
+    "quicksilver-shaders.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.14.0",
+    "minecraft": "1.0.0-beta.7.3"
+  }
+}
