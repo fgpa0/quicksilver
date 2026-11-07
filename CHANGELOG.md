@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.1 (2026-11-07)
+- Marked as incompatible with StationAPI: the launcher now refuses to start with both installed and says why,
+  instead of crashing with a mixin error (they never worked together).
+
 ## 0.1.0 (2026-11-07)
 First public release.
 - VBO terrain renderer, threaded chunk meshing, cave culling, GPU time of day.

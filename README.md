@@ -64,6 +64,9 @@ Releases are built by GitHub Actions: pushing a tag `v<version>` (matching `vers
 
 ## Known issues
 
+- **Not compatible with StationAPI.** Both change the same core parts of the game (chunk storage, rendering, world
+  ticking); the launcher refuses to start with both installed. Mods that don't need StationAPI work as usual.
+
 - With `-Dquicksilver.verifyDecoration=1`, a few differences between background and vanilla decoration are still
   reported, mostly around lava. Normal play is not affected.
 - Mods that change block rendering or world generation may conflict: unknown blocks are meshed on the game thread,

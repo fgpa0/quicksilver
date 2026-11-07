@@ -24,7 +24,8 @@ python3 build.py   # JDK 17+ and Python 3 -> build/libs/quicksilver-<version>.ja
 
 - Performance work: measure first, review the numbers, and propose changes before building them.
 - Keep scope contained; suggest extras instead of building them.
-- No references to other mods (no compatibility checks by mod id, no integrations).
+- No references to other mods (no compatibility checks by mod id, no integrations). One exception: `"breaks":
+  {"stationapi": "*"}` in `fabric.mod.json`, because StationAPI's mixins clash with `LevelMixin` (startup crash).
 
 ## Architecture
 
